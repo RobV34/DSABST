@@ -7,6 +7,7 @@ import com.example.bst.repository.TreeRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +25,7 @@ public class BSTService {
 
         TreeRecord record = new TreeRecord();
         record.setInputNumbers(numbers);
-        record.setTreeStructure(convertTreeToString(bst.getRoot()));
+        record.setTreeStructure(convertTreeToJson(bst.getRoot()));
 
         treeRecordRepository.save(record);
         return record;
@@ -34,20 +35,18 @@ public class BSTService {
         return treeRecordRepository.findAll();
     }
 
-    private String convertTreeToString(TreeNode node) {
+    private String convertTreeToJson(TreeNode node) {
         if (node == null) {
-            return "";
+            return "null";
         }
         StringBuilder sb = new StringBuilder();
-        sb.append(node.getValue());
-        if (node.getLeft() != null || node.getRight() != null) {
-            sb.append("(");
-            sb.append(convertTreeToString(node.getLeft()));
-            sb.append(",");
-            sb.append(convertTreeToString(node.getRight()));
-            sb.append(")");
-        }
-        return sb.toString();
+        sb.append("{\n");
+        sb.append("  \"value\": ").append(node.getValue()).append(",\n");
+        sb.append("  \"left\": ").append(convertTreeToJson(node.getLeft())).append(",\n");
+        sb.append("  \"right\": ").append(convertTreeToJson(node.getRight())).append("\n");
+        sb.append("}");
+        return sb.toString().replace("\\\"", "\"");  // Ensure proper JSON formatting
     }
+
 }
 
