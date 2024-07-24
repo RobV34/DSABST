@@ -38,7 +38,16 @@ public class BSTService {
         if (node == null) {
             return "";
         }
-        return node.getValue() + "(" + convertTreeToString(node.getLeft()) + "," + convertTreeToString(node.getRight()) + ")";
+        StringBuilder sb = new StringBuilder();
+        sb.append(node.getValue());
+        if (node.getLeft() != null || node.getRight() != null) {
+            sb.append("(");
+            sb.append(convertTreeToString(node.getLeft()));
+            sb.append(",");
+            sb.append(convertTreeToString(node.getRight()));
+            sb.append(")");
+        }
+        return sb.toString();
     }
 }
 
