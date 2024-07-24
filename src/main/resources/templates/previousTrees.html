@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Previous Trees</title>
+</head>
+<body>
+<h1>Previous Trees</h1>
+<ul>
+    <li th:each="tree : ${previousTrees}">
+        <p>Input Numbers: <span th:text="${tree.inputNumbers}"></span></p>
+        <p>Tree Structure: <span th:text="${tree.treeStructure}"></span></p>
+    </li>
+</ul>
+</body>
+</html>
