@@ -1,15 +1,15 @@
 package com.example.bst.service;
 
-import com.example.bst.model.BinarySearchTree;
+import com.example.bst.model.AVLTree;
 import com.example.bst.model.TreeNode;
 import com.example.bst.model.TreeRecord;
 import com.example.bst.repository.TreeRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BSTService {
@@ -17,15 +17,22 @@ public class BSTService {
     @Autowired
     private TreeRecordRepository treeRecordRepository;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     public TreeRecord processNumbers(List<Integer> numbers) {
-        BinarySearchTree bst = new BinarySearchTree();
+        AVLTree avlTree = new AVLTree();
         for (int number : numbers) {
-            bst.insert(number);
+            avlTree.insert(number);
         }
 
         TreeRecord record = new TreeRecord();
         record.setInputNumbers(numbers);
-        record.setTreeStructure(convertTreeToJson(bst.getRoot()));
+        try {
+            record.setTreeStructure(objectMapper.writeValueAsString(avlTree.getRoot()));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 
         treeRecordRepository.save(record);
         return record;
@@ -34,19 +41,7 @@ public class BSTService {
     public List<TreeRecord> getPreviousTrees() {
         return treeRecordRepository.findAll();
     }
-
-    private String convertTreeToJson(TreeNode node) {
-        if (node == null) {
-            return "null";
-        }
-        StringBuilder sb = new StringBuilder();
-        sb.append("{\n");
-        sb.append("  \"value\": ").append(node.getValue()).append(",\n");
-        sb.append("  \"left\": ").append(convertTreeToJson(node.getLeft())).append(",\n");
-        sb.append("  \"right\": ").append(convertTreeToJson(node.getRight())).append("\n");
-        sb.append("}");
-        return sb.toString().replace("\\\"", "\"");  // Ensure proper JSON formatting
-    }
-
 }
+
+
 

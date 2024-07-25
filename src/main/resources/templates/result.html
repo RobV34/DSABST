@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Binary Search Tree Result</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .result-box {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .btn-back {
+            margin-top: 20px;
+        }
+        pre {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="result-box">
+        <h2>Binary Search Tree Result</h2>
+        <p><strong>Input Numbers:</strong> <span th:text="${inputNumbers}"></span></p>
+        <p><strong>Tree Root:</strong></p>
+        <pre th:utext="${treeRoot}"></pre>
+        <p><strong>Tree Structure:</strong></p>
+        <pre th:utext="${treeStructure}"></pre>
+        <a href="/" class="btn btn-success btn-back">Back</a>
+    </div>
+</div>
+</body>
+</html>
+
