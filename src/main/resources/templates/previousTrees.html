@@ -1,45 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Previous Trees</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
         .container {
-            margin-top: 50px;
-        }
-        .card {
+            background-color: #fff;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
         }
-        pre {
-            background-color: #e9ecef;
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .tree-item {
+            background-color: #f0f0f0;
             padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .back-button {
+            display: block;
+            width: 100px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
             border-radius: 5px;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="card">
-        <h1 class="text-center">Previous Trees</h1>
-        <ul>
-            <li th:each="tree : ${previousTrees}">
-                <p>Input Numbers: <span th:text="${tree.inputNumbers}"></span></p>
-                <p>Tree Root: <span th:text="${tree.treeStructure.value}"></span></p>
-                <p>Tree Structure:</p>
-                <pre><code th:text="${tree.treeStructure}"></code></pre>
-            </li>
-        </ul>
-        <div class="text-center mt-3">
-            <a href="/enterNumbers" class="btn btn-success">Back</a>
+    <h1>Previous Trees</h1>
+    <div th:each="tree : ${previousTrees}">
+        <div class="tree-item">
+            <p><strong>Input Numbers:</strong> <span th:text="${tree.inputNumbers}"></span></p>
+            <p><strong>Tree Structure:</strong></p>
+            <pre th:text="${tree.treeStructure}"></pre>
         </div>
     </div>
+    <a href="/enterNumbers" class="back-button">Back</a>
 </div>
 </body>
 </html>
+
 
 
