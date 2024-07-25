@@ -4,14 +4,14 @@ public class TreeNode {
     private int value;
     private TreeNode left;
     private TreeNode right;
+    private int height;
 
     public TreeNode(int value) {
         this.value = value;
         this.left = null;
         this.right = null;
+        this.height = 1;
     }
-
-    // Getters and setters
 
     public int getValue() {
         return value;
@@ -36,5 +36,14 @@ public class TreeNode {
     public void setRight(TreeNode right) {
         this.right = right;
     }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
 }
+
 

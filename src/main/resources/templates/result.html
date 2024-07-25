@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Previous Trees</title>
+    <title>Binary Search Tree Result</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,11 +27,11 @@
             text-align: center;
             color: #333;
         }
-        .tree-item {
+        .tree-structure {
             background-color: #f0f0f0;
             padding: 15px;
             border-radius: 8px;
-            margin-bottom: 10px;
+            overflow-x: auto;
             white-space: pre-wrap;
             font-family: 'Courier New', Courier, monospace;
         }
@@ -54,13 +54,12 @@
 </head>
 <body>
 <div class="container">
-    <h1>Previous Trees</h1>
-    <div th:each="tree : ${previousTrees}">
-        <div class="tree-item">
-            <p><strong>Input Numbers:</strong> <span th:text="${tree.inputNumbers}"></span></p>
-            <p><strong>Tree Structure:</strong></p>
-            <pre th:text="${tree.treeStructure}"></pre>
-        </div>
+    <h1>Binary Search Tree Result</h1>
+    <p><strong>Input Numbers:</strong> <span th:text="${inputNumbers}"></span></p>
+    <p><strong>Tree Root:</strong> <span th:text="${treeRoot}"></span></p>
+    <p><strong>Tree Structure:</strong></p>
+    <div class="tree-structure">
+        <pre th:text="${treeStructure}"></pre>
     </div>
     <a href="/enterNumbers" class="back-button">Back</a>
 </div>
